@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sécurité en Forêt</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQs0fOP31lp12yRQ5sT2GeLz4YybBGiLE"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html"><b>Accueil</b></a>
+          </li>
+          <li>
+            <a href="page_projet.html"><b>Projet</b></a>
+          </li>
+          <li>
+            <a href="page_carte.html"><b>Zones à Risque</b></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <h3>Coordonnées GPS des panneaux</h3>
+    <button id="connectButton">Se connecter au GPS</button>
+    <div id="data" style="text-align: center">
+      Aucune donnée reçue pour l'instant.
+    </div>
+    <div id="map"></div>
+
+    <script>
+      let port, reader;
+      let map, marker;
+
+      function initMap() {
+        const initialPosition = { lat: 0, lng: 0 };
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: initialPosition,
+          zoom: 2,
+        });
+
+        marker = new google.maps.Marker({
+          position: initialPosition,
+          map: map,
+          title: "Position actuelle",
+        });
+      }
+
+      async function connectToGPS() {
+        try {
+          port = await navigator.serial.requestPort();
+          await port.open({ baudRate: 9600 });
+
+          reader = port.readable.getReader();
+          readData();
+        } catch (error) {
+          console.error("Erreur de connexion :", error);
+        }
+      }
+
+      async function readData() {
+        const decoder = new TextDecoder();
+        let buffer = "";
+
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          if (value) {
+            buffer += decoder.decode(value);
+
+            let newlineIndex;
+            while ((newlineIndex = buffer.indexOf("\n")) >= 0) {
+              const line = buffer.substring(0, newlineIndex).trim();
+              buffer = buffer.substring(newlineIndex + 1);
+
+              try {
+                const data = JSON.parse(line);
+                afficherCoordonnees(data);
+                mettreAJourCarte(data.latitude, data.longitude);
+              } catch (e) {
+                console.error("Erreur de parsing JSON :", e);
+              }
+            }
+          }
+        }
+      }
+
+      function afficherCoordonnees(data) {
+        document.getElementById(
+          "data"
+        ).innerText = `Latitude : ${data.latitude}\nLongitude : ${data.longitude}`;
+      }
+
+      function mettreAJourCarte(latitude, longitude) {
+        const position = {
+          lat: parseFloat(latitude),
+          lng: parseFloat(longitude),
+        };
+        marker.setPosition(position);
+        map.setCenter(position);
+      }
+
+      document
+        .getElementById("connectButton")
+        .addEventListener("click", connectToGPS);
+      initMap();
+    </script>
+
+    <footer>
+      <p><b>&copy; 2025 Sécurité en Forêt - Groupe 2</b></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+/*########################################## INITIALISATION ######################################################################*/
+
+:root {
+  /*Palette de couleurs de base*/
+  --primary-color: #ade4ad;
+  --secondary-color: #bfd5e8;
+  --accent-color: #d0d1d2;
+  --background-color: white;
+  --text-color: black;
+  --white-color: white;
+}
+
+@font-face {
+  /*Import des polices*/
+  font-family: "LULO CLEAN";
+  src: url("Polices/lulo_clean/lulo_clean_one_bold.otf");
+}
+
+@font-face {
+  font-family: "Avenir Light";
+  src: url("Polices/avenir_light/Avenir\ Light.ttf");
+}
+
+/*########################################## HEADER ######################################################################*/
+
+header {
+  /*Barre de navigation*/
+  font-family: "LULO CLEAN";
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none; /*Enleve les points de la liste */
+  text-align: center;
+}
+
+nav ul li {
+  display: inline; /*Sur la mm ligne*/
+  margin: 20px 20px;
+}
+
+nav ul li a {
+  padding: 20px;
+  color: black;
+  text-decoration: none; /*Enlève le soulignement */
+  font-size: 15px;
+  transition: 0.3s; /*Transition plus lente*/
+}
+
+nav ul li a:hover {
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+/*########################################## GENERAUX ######################################################################*/
+
+body {
+  font-family: "Avenir Light";
+  width: 100%;
+}
+
+h2 {
+  font-family: "LULO CLEAN";
+  margin: 25px;
+}
+
+h3 {
+  text-align: center;
+  margin: 5%;
+}
+
+p {
+  margin: 25px;
+}
+
+button {
+  font-family: "LULO CLEAN", sans-serif;
+  background-color: transparent;
+  border-radius: 25px;
+  color: black;
+  text-align: center;
+  padding: 10px 20px;
+  border: 3px solid black;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  border: 3px solid var(--primary-color);
+}
+
+/*########################################## BIENVENUE ######################################################################*/
+
+#Bienvenue {
+  background-image: url("Images/fond_ecran_foret.jpg");
+  background-size: cover;
+  padding: 8%;
+}
+
+#box_bienvenue {
+  color: black;
+  background-color: white;
+  margin: 25px;
+  margin-left: 5%;
+  margin-right: 40%;
+  margin-top: 5%;
+  border-radius: 25px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+#box_bienvenue:hover {
+  transform: scale(1.02);
+}
+
+/*########################################## RISQUES POTENTIELS ######################################################################*/
+
+#RisquesPotentiels {
+  margin-right: 5%;
+  margin-left: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: white;
+  color: black;
+}
+
+#RisquesPotentiels ul {
+  margin-top: 5%;
+}
+
+#RisquesPotentiels li {
+  display: flex;
+  align-items: center;
+  gap: 15px; /*Espace entre les éléments (image et texte)*/
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px var(--accent-color);
+  transition: 0.3s;
+  max-width: 40%;
+  margin: 1% auto;
+}
+
+#RisquesPotentiels li:hover {
+  transform: scale(1.03);
+}
+
+#RisquesPotentiels img {
+  width: 40px;
+  height: 40px;
+}
+
+/*########################################## EXPLICATION RISQUES ######################################################################*/
+
+#ExplicationRisques img {
+  width: 100%;
+  height: auto;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+#ExplicationRisques td {
+  text-align: center;
+  width: 50%; /*Chaque colonne occupe 50% de la fenetre*/
+  transform: scale(0.97);
+  transition: 0.3s;
+}
+#ExplicationRisques td:hover {
+  transform: scale(0.98);
+}
+
+#td_texte {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+/*########################################## SPRINT ######################################################################*/
+
+.TableSprint {
+  background-color: var(--primary-color);
+  border-radius: 50px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 5px 5px 15px var(--accent-color);
+  width: 100%;
+  transition: 0.3s;
+}
+.TableSprint:hover {
+  transform: scale(1.02);
+}
+
+#Sprint td {
+  width: 25%;
+  vertical-align: top; /*Aligné vers le haut */
+  padding: 15px;
+}
+
+/*########################################## CARTE ######################################################################*/
+
+#map {
+  width: 80%;
+  height: 500px;
+  margin: auto;
+  margin-top: 20px;
+}
+#data {
+  margin-top: 20px;
+}
+
+/*########################################## FOOTER ######################################################################*/
+
+footer {
+  color: var(--primary-color);
+  text-align: center;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+}
